@@ -9,7 +9,7 @@ pipeline {
 
       stage ('Checkout SCM'){
         steps {
-          checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'git', url: 'https://iwayqtech@bitbucket.org/iwayqtech/devops-pipeline-project.git']]])
+          checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'git', url: 'https://github.com/rmspavan/webapp.git']]])
         }
       }
 	  
@@ -107,7 +107,7 @@ pipeline {
                   sshagent(['sshkey']) {
                        
                         sh "scp -o StrictHostKeyChecking=no create-k8s-deployment.yaml ec2-user@54.162.42.75:/home/ec2-user"
-                        sh "scp -o StrictHostKeyChecking=no nodePort.yaml ec2-user@54.162.42.75:/home/ec2-user"
+                        #sh "scp -o StrictHostKeyChecking=no nodePort.yaml ec2-user@54.162.42.75:/home/ec2-user"
                     }
                 }
             
@@ -127,7 +127,7 @@ pipeline {
                   sshagent(['sshkey']) {
                        
                         sh "ssh -o StrictHostKeyChecking=no ec2-user@54.162.42.75 -C \"sudo kubectl apply -f create-k8s-deployment.yaml\""
-                        sh "ssh -o StrictHostKeyChecking=no ec2-user@54.162.42.75 -C \"sudo kubectl apply -f nodePort.yaml\""
+                        #sh "ssh -o StrictHostKeyChecking=no ec2-user@54.162.42.75 -C \"sudo kubectl apply -f nodePort.yaml\""
                         
                     }
                 }

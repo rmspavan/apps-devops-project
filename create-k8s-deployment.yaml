@@ -1,4 +1,5 @@
 #Deployment
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -17,6 +18,25 @@ spec:
     spec:
       containers:
       - name: web-container
-        image: webdockertest/web:1.0
+        image: rmspavan/web:1.0
         ports:
-        - containerPort: 8080
+        - containerPort: 8080       
+...
+
+#Service Type nodePort
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-service
+  labels:
+    app: web-app
+spec:
+  selector:
+    app: web-app
+
+  type: NodePort
+  ports:
+  - nodePort: 31000
+    port: 8080
+    targetPort: 8080

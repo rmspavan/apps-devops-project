@@ -6,4 +6,4 @@ From tomcat:latest
 MAINTAINER "Pavan" 
 
 # copy war file on to container 
-COPY ./iwayq.war /usr/local/tomcat/webapps
+COPY ./web.war /usr/local/tomcat/webapps
